@@ -13,7 +13,7 @@ public class PluginManager {
     }
 
     Plugin load(String pluginName, String pluginClassName) throws IOException, ClassNotFoundException, NoClassDefFoundError, NoSuchMethodException, IllegalAccessException, ClassCastException, InstantiationException,  InvocationTargetException {
-        URL[] urlArray = new URL[1]; // URLClassLoader принимает только массив
+        URL[] urlArray = new URL[1]; // URLClassLoader РїСЂРёРЅРёРјР°РµС‚ С‚РѕР»СЊРєРѕ РјР°СЃСЃРёРІ
         urlArray[0] = new URL(pluginRootDirectory);
         URLClassLoader urlLoader = new URLClassLoader(urlArray);
 
