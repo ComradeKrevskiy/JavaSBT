@@ -18,7 +18,7 @@ public class EncryptedClassLoader extends ClassLoader {
         byte[] classData = {};
         try {
             classData = readStream(name);
-        } catch (IOException e) {}
+        } catch (IOException e) {return null;}
 
         classData = decryptData(classData);
         return defineClass(name, classData, 0, classData.length);
@@ -39,13 +39,14 @@ public class EncryptedClassLoader extends ClassLoader {
     }
 
     byte[] readStream(String name)throws IOException {
-        byte[] buf = {};
+        ArrayList<Byte> buf = new ArrayList<>();
         try {
             InputStream inputStream = new FileInputStream(dir.getAbsolutePath() + "\\" + name.replace(".", "\\") + ".class");
-            inputStream.read(buf);
-            int fileLen = inputStream.available();
+            int b;
+            while((b = inputStream.read()) != -1)// -1 - EOF
+                buf.add((byte)b);
 
         } catch (FileNotFoundException e) {}
-        return buf;
+        return (byte[])buf.toArray();
     }
 }
